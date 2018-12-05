@@ -10,3 +10,8 @@ end
 get '/' do
 	erb :index
 end
+
+get '/products' do
+	@products = Product.all
+	erb :products
+end
