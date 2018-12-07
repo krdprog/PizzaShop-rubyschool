@@ -8,10 +8,26 @@
 </head>
 <body>
 
-<p><a href="/">Главная страница</a> | <a href="/products">Наша продукция</a></p>
+<p><a href="/">Главная страница</a> | <a href="/products">Наша продукция</a>
+
+	<form action="/cart" method="POST">
+		<input type="hidden" name="orders" id="orders_input">
+		<input type="submit" id="orders_button">
+	</form>
+</p>
 
 <%= yield %>
 
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="/js/main.js"></script>
+
+	<script>
+		$(function() {
+			update_orders_input();
+			update_orders_button();
+		});
+	</script>
+
 </body>
 </html>
