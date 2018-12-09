@@ -7,6 +7,9 @@ set :database, "sqlite3:database.db"
 class Product < ActiveRecord::Base
 end
 
+class Order < ActiveRecord::Base
+end
+
 get '/' do
 	erb :index
 end
@@ -56,4 +59,16 @@ def parse_orders_input orders_input
 	end
 
 	return arr
+end
+
+post '/place_order' do
+	@o = Order.new params[:order]
+	@o.save
+
+	erb "Спасибо, ваш заказ принят!"
+end
+
+get '/manager' do
+	@order = Order.all
+	erb :manager
 end
