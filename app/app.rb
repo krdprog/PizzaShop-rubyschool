@@ -28,14 +28,22 @@ get '/cart' do
 end
 
 post '/cart' do
+
 	@orders_input = params[:orders]
 
 	@items = parse_orders_input @orders_input
 
+	# если корзина пустая
+	if @items.length == 0
+		return erb "В корзине нет товаров"
+	end
+
+	# выводим список продуктов в корзине
 	@items.each do |item|
 		# id, cnt
 		item[0] = Product.find(item[0])
 	end
+
 
 	erb :cart
 end
@@ -62,10 +70,9 @@ def parse_orders_input orders_input
 end
 
 post '/place_order' do
-	@o = Order.new params[:order]
-	@o.save
+	@o = Order.create params[:order]
 
-	erb "Спасибо, ваш заказ принят!"
+	erb :order_placed
 end
 
 get '/manager' do
