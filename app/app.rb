@@ -11,71 +11,70 @@ class Order < ActiveRecord::Base
 end
 
 get '/' do
-	erb :index
+  erb :index
 end
 
 get '/products' do
-	@products = Product.all
-	erb :products
+  @products = Product.all
+  erb :products
 end
 
 # post '/products' do
-# 	:cart
+#   :cart
 # end
 
 get '/cart' do
-	erb :cart
+  erb :cart
 end
 
 post '/cart' do
 
-	@orders_input = params[:orders]
+  @orders_input = params[:orders]
 
-	@items = parse_orders_input @orders_input
+  @items = parse_orders_input @orders_input
 
-	# если корзина пустая
-	if @items.length == 0
-		return erb "В корзине нет товаров"
-	end
+  # если корзина пустая
+  if @items.length == 0
+    return erb "В корзине нет товаров"
+  end
 
-	# выводим список продуктов в корзине
-	@items.each do |item|
-		# id, cnt
-		item[0] = Product.find(item[0])
-	end
+  # выводим список продуктов в корзине
+  @items.each do |item|
+    # id, cnt
+    item[0] = Product.find(item[0])
+  end
 
-
-	erb :cart
+  erb :cart
 end
 
 # Parse orders line:
 def parse_orders_input orders_input
 
-	s1 = orders_input.split(/,/)
+  s1 = orders_input.split(/,/)
 
-	arr = []
+  arr = []
 
-	s1.each do |x|
-		s2 = x.split(/=/)
-		s3 = s2[0].split(/_/)
+  s1.each do |x|
+    s2 = x.split(/=/)
+    s3 = s2[0].split(/_/)
 
-		id = s3[1]
-		cnt = s2[1]
+    id = s3[1]
+    cnt = s2[1]
 
-		arr2 = [id, cnt]
-		arr.push arr2
-	end
+    arr2 = [id, cnt]
+    arr.push arr2
+  end
 
-	return arr
+  return arr
 end
 
 post '/place_order' do
-	@o = Order.create params[:order]
+  @o = Order.create params[:order]
 
-	erb :order_placed
+  erb :order_placed
 end
 
 get '/manager' do
-	@order = Order.all
-	erb :manager
+  @order = Order.all
+  erb :manager
 end

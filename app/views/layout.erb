@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
-	<link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <p><a href="/">Главная страница</a> | <a href="/products">Наша продукция</a> | <a href="/manager">Доступ менеджера</a>
 
-	<form action="/cart" method="POST">
-		<input type="hidden" name="orders" id="orders_input">
-		<input type="submit" id="orders_button">
-	</form>
+  <form action="/cart" method="POST">
+    <input type="hidden" name="orders" id="orders_input">
+    <input type="submit" id="orders_button">
+  </form>
 </p>
 
 <%= yield %>
 
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="/js/main.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="/js/main.js"></script>
 
-	<script>
-		$(function() {
-			update_orders_input();
-			update_orders_button();
-		});
-	</script>
+  <script>
+    $(function() {
+      update_orders_input();
+      update_orders_button();
+    });
+  </script>
 
 </body>
 </html>
